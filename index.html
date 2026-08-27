@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Good Morning ☀️</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #0879d0;
+}
+
+
+/* =========================================================
+   MAIN SCENE
+========================================================= */
+
+.scene {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+    min-height: 520px;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #0879d0 0%,
+            #2d9fe0 35%,
+            #78c9ed 57%,
+            #f8d993 79%,
+            #ffd66e 100%
+        );
+
+    opacity: 0;
+
+    transition: opacity 1.4s ease;
+}
+
+.scene.revealed {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
+
+.intro {
+    position: fixed;
+
+    z-index: 100;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #0879d0,
+            #45afe2
+        );
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+.intro.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FLOATING SUN BUTTON
+========================================================= */
+
+.sun-button {
+    position: relative;
+
+    width: clamp(135px, 22vw, 210px);
+    aspect-ratio: 1;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff8a5 0%,
+            #ffe95a 35%,
+            #ffd52e 72%,
+            #ffc51d 100%
+        );
+
+    box-shadow:
+        0 0 35px 12px rgba(255,235,92,0.5),
+        0 0 90px 35px rgba(255,220,75,0.25);
+
+    animation:
+        floatingSun 3.5s ease-in-out infinite,
+        sunGlow 3s ease-in-out infinite;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.sun-button::before,
+.sun-button::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 135%;
+    height: 135%;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255,239,122,0.18);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.8);
+
+    animation:
+        sunRing 3s ease-out infinite;
+}
+
+.sun-button::after {
+    animation-delay: 1.5s;
+}
+
+.sun-button:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 45px 18px rgba(255,235,92,0.65),
+        0 0 110px 45px rgba(255,220,75,0.3);
+}
+
+.sun-button:active {
+    transform: scale(0.94);
+}
+
+.sun-button span {
+    position: relative;
+
+    z-index: 2;
+
+    color: #73561b;
+
+    font-size:
+        clamp(1.1rem, 3vw, 1.5rem);
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+@keyframes floatingSun {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-13px);
+    }
+}
+
+@keyframes sunGlow {
+
+    0%,100% {
+        box-shadow:
+            0 0 35px 12px rgba(255,235,92,0.5),
+            0 0 90px 35px rgba(255,220,75,0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 0 50px 18px rgba(255,235,92,0.7),
+            0 0 120px 48px rgba(255,220,75,0.35);
+    }
+}
+
+@keyframes sunRing {
+
+    0% {
+        opacity: 0.65;
+
+        transform:
+            translate(-50%,-50%)
+            scale(0.8);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   MORNING MESSAGE
+========================================================= */
+
+.message {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 10%;
+    left: 50%;
+
+    width: min(92%, 900px);
+
+    text-align: center;
+
+    color: white;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%,-40px);
+}
+
+.scene.revealed .message {
+    animation:
+        messageReveal 1.5s
+        0.2s
+        cubic-bezier(.2,.8,.25,1)
+        forwards;
+}
+
+.message h1 {
+    font-size:
+        clamp(3rem,8vw,6.2rem);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 3px 12px rgba(21,74,111,0.25);
+}
+
+.message p {
+    margin-top: 20px;
+
+    font-size:
+        clamp(1.2rem,3vw,2rem);
+
+    font-weight: 600;
+
+    text-shadow:
+        0 3px 10px rgba(21,74,111,0.2);
+}
+
+.heart {
+    display: inline-block;
+
+    color: #ffd943;
+
+    animation:
+        heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes messageReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-45px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%,0);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.cloud {
+    position: absolute;
+
+    z-index: 6;
+
+    width: 150px;
+    height: 38px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,0.78);
+
+    opacity: 0.85;
+
+    pointer-events: none;
+
+    animation:
+        cloudMove linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: inherit;
+}
+
+.cloud::before {
+    width: 60px;
+    height: 60px;
+
+    left: 23px;
+    top: -28px;
+}
+
+.cloud::after {
+    width: 76px;
+    height: 76px;
+
+    left: 68px;
+    top: -42px;
+}
+
+.cloud.one {
+    top: 18%;
+    left: -180px;
+
+    animation-duration: 38s;
+}
+
+.cloud.two {
+    top: 31%;
+    left: -250px;
+
+    transform: scale(0.68);
+
+    opacity: 0.65;
+
+    animation-duration: 47s;
+    animation-delay: -15s;
+}
+
+.cloud.three {
+    top: 11%;
+    left: -300px;
+
+    transform: scale(0.5);
+
+    opacity: 0.5;
+
+    animation-duration: 52s;
+    animation-delay: -28s;
+}
+
+@keyframes cloudMove {
+
+    from {
+        left: -250px;
+    }
+
+    to {
+        left: 115%;
+    }
+}
+
+
+/* =========================================================
+   SUN
+========================================================= */
+
+.sun-glow {
+    position: absolute;
+
+    z-index: 1;
+
+    left: 50%;
+    bottom: 20%;
+
+    width:
+        min(58vw,560px);
+
+    aspect-ratio: 1;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,245,159,0.65),
+            rgba(255,231,111,0.28) 38%,
+            transparent 70%
+        );
+
+    opacity: 0;
+}
+
+.scene.revealed .sun-glow {
+    animation:
+        glowAppear 2s 0.2s ease forwards,
+        glowPulse 4s 2.2s ease-in-out infinite;
+}
+
+@keyframes glowAppear {
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes glowPulse {
+
+    50% {
+        transform:
+            translateX(-50%)
+            scale(1.08);
+    }
+}
+
+.rays {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 50%;
+    bottom: 20%;
+
+    width:
+        min(45vw,460px);
+
+    aspect-ratio: 1;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        repeating-conic-gradient(
+            rgba(255,244,161,0.25) 0deg 2deg,
+            transparent 2deg 19deg
+        );
+
+    opacity: 0;
+}
+
+.scene.revealed .rays {
+    animation:
+        raysAppear 2s 0.5s ease forwards,
+        rotateRays 35s 2.5s linear infinite;
+}
+
+@keyframes raysAppear {
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes rotateRays {
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(360deg);
+    }
+}
+
+.scene-sun {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 50%;
+    bottom: 20%;
+
+    width:
+        clamp(90px,12vw,155px);
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff7a2,
+            #ffe94d 45%,
+            #ffd52f 100%
+        );
+
+    box-shadow:
+        0 0 28px 12px rgba(255,231,74,0.55),
+        0 0 75px 28px rgba(255,221,82,0.25);
+
+    transform:
+        translate(-50%,170px);
+
+    opacity: 0;
+}
+
+.scene.revealed .scene-sun {
+    animation:
+        sunrise 3s
+        0.1s
+        cubic-bezier(.2,.78,.25,1)
+        forwards,
+        sunPulse 4s
+        3.2s
+        ease-in-out infinite;
+}
+
+@keyframes sunrise {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,170px)
+            scale(0.85);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(-50%,0)
+            scale(1);
+    }
+}
+
+@keyframes sunPulse {
+
+    50% {
+        box-shadow:
+            0 0 40px 18px rgba(255,231,74,0.7),
+            0 0 95px 35px rgba(255,221,82,0.3);
+    }
+}
+
+
+/* =========================================================
+   BIRDS
+========================================================= */
+
+.birds {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 39%;
+    left: -100px;
+
+    color: #36586d;
+
+    font-size: 23px;
+
+    opacity: 0;
+}
+
+.scene.revealed .birds {
+    animation:
+        birdAppear 1s 1.2s ease forwards,
+        birdFly 18s 2s linear infinite;
+}
+
+@keyframes birdAppear {
+
+    to {
+        opacity: 0.6;
+    }
+}
+
+@keyframes birdFly {
+
+    0% {
+        left: -100px;
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(8px);
+    }
+
+    100% {
+        left: 110%;
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   HILLS
+========================================================= */
+
+.hills {
+    position: absolute;
+
+    z-index: 12;
+
+    bottom: 25%;
+    left: 0;
+
+    width: 100%;
+    height: 14%;
+
+    background: #5c983f;
+
+    clip-path:
+        polygon(
+            0 72%,
+            8% 45%,
+            17% 66%,
+            29% 35%,
+            42% 67%,
+            54% 45%,
+            68% 70%,
+            82% 38%,
+            94% 63%,
+            100% 48%,
+            100% 100%,
+            0 100%
+        );
+
+    opacity: 0;
+}
+
+.scene.revealed .hills {
+    animation:
+        landscapeReveal 1.5s
+        0.5s
+        ease-out
+        forwards;
+}
+
+.hills::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 20% 0 0;
+
+    background: #477f39;
+
+    clip-path:
+        polygon(
+            0 60%,
+            18% 38%,
+            35% 65%,
+            54% 40%,
+            75% 67%,
+            100% 42%,
+            100% 100%,
+            0 100%
+        );
+}
+
+@keyframes landscapeReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   WATER
+========================================================= */
+
+.water {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 27%;
+
+    min-height: 140px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #63bad9,
+            #45a9d2 55%,
+            #3599c5
+        );
+
+    overflow: hidden;
+
+    opacity: 0;
+}
+
+.scene.revealed .water {
+    animation:
+        waterReveal 1.3s
+        0.65s
+        ease-out
+        forwards;
+}
+
+
+/* =========================================================
+   WATER SUN REFLECTION
+========================================================= */
+
+.water::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 1;
+
+    top: 4%;
+    left: 50%;
+
+    width: 24%;
+    height: 85%;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,239,140,0.58) 0 3px,
+            transparent 3px 13px
+        );
+
+    animation:
+        reflection 2.8s ease-in-out infinite;
+}
+
+@keyframes waterReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes reflection {
+
+    0%,100% {
+        width: 19%;
+        opacity: 0.4;
+    }
+
+    50% {
+        width: 34%;
+        opacity: 0.82;
+    }
+}
+
+
+/* =========================================================
+   TREES
+========================================================= */
+
+.trees {
+    position: absolute;
+
+    z-index: 38;
+
+    bottom: 20%;
+
+    width: 260px;
+    height: 330px;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+.scene.revealed .trees {
+    animation:
+        treesAppear 1.3s
+        0.8s
+        ease-out
+        forwards;
+}
+
+.trees.left {
+    left: -20px;
+}
+
+.trees.right {
+    right: -20px;
+
+    transform: scaleX(-1);
+}
+
+
+/* =========================================================
+   TREE TRUNK
+========================================================= */
+
+.trunk {
+    position: absolute;
+
+    bottom: 0;
+    left: 105px;
+
+    width: 48px;
+    height: 220px;
+
+    border-radius:
+        45% 45% 15% 15%;
+
+    background:
+        linear-gradient(
+            to right,
+            #58351f,
+            #794728 45%,
+            #4d2d1c
+        );
+
+    transform:
+        rotate(-3deg);
+
+    transform-origin:
+        bottom center;
+}
+
+
+/* =========================================================
+   TREE BRANCHES
+========================================================= */
+
+.branch {
+    position: absolute;
+
+    height: 18px;
+
+    border-radius: 20px;
+
+    background: #5a351f;
+
+    transform-origin: left center;
+}
+
+.branch.one {
+    left: 118px;
+    bottom: 160px;
+
+    width: 115px;
+
+    transform:
+        rotate(-35deg);
+}
+
+.branch.two {
+    left: 105px;
+    bottom: 135px;
+
+    width: 105px;
+
+    transform:
+        rotate(35deg);
+}
+
+.branch.three {
+    left: 122px;
+    bottom: 190px;
+
+    width: 75px;
+
+    transform:
+        rotate(-50deg);
+}
+
+
+/* =========================================================
+   TREE FOLIAGE
+========================================================= */
+
+.foliage {
+    position: absolute;
+
+    width: 110px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #69a94a,
+            #39843c 55%,
+            #246632 100%
+        );
+
+    box-shadow:
+        inset -12px -8px 0 rgba(0,0,0,0.06);
+
+    transform-origin:
+        bottom center;
+}
+
+.foliage.one {
+    left: 35px;
+    bottom: 170px;
+
+    width: 125px;
+    height: 105px;
+
+    animation:
+        treeSway 4s ease-in-out infinite;
+}
+
+.foliage.two {
+    left: 105px;
+    bottom: 185px;
+
+    width: 125px;
+    height: 115px;
+
+    animation:
+        treeSway 4.7s ease-in-out -1s infinite;
+}
+
+.foliage.three {
+    left: 125px;
+    bottom: 115px;
+
+    width: 105px;
+    height: 90px;
+
+    animation:
+        treeSway 3.8s ease-in-out -0.5s infinite;
+}
+
+.foliage.four {
+    left: 15px;
+    bottom: 110px;
+
+    width: 105px;
+    height: 90px;
+
+    animation:
+        treeSway 4.4s ease-in-out -1.7s infinite;
+}
+
+.foliage.five {
+    left: 75px;
+    bottom: 225px;
+
+    width: 105px;
+    height: 90px;
+
+    animation:
+        treeSway 5s ease-in-out -2s infinite;
+}
+
+
+/* Smaller highlight leaves */
+
+.foliage::after {
+    content: "";
+
+    position: absolute;
+
+    left: 22%;
+    top: 18%;
+
+    width: 30px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(133,190,72,0.55);
+
+    transform:
+        rotate(-20deg);
+}
+
+
+/* =========================================================
+   TREE GRASS / ROOTS
+========================================================= */
+
+.root {
+    position: absolute;
+
+    bottom: -3px;
+
+    width: 75px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #39773a;
+
+    filter: blur(1px);
+}
+
+.root.left-root {
+    left: 65px;
+}
+
+.root.right-root {
+    left: 130px;
+}
+
+
+/* =========================================================
+   TREE ANIMATIONS
+========================================================= */
+
+@keyframes treesAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes treeSway {
+
+    0%,100% {
+        transform:
+            rotate(0deg)
+            translateX(0);
+    }
+
+    50% {
+        transform:
+            rotate(1.8deg)
+            translateX(3px);
+    }
+}
+
+
+/* =========================================================
+   HUGGING CHARACTERS
+========================================================= */
+
+.hug-area {
+    position: absolute;
+
+    z-index: 45;
+
+    left: 50%;
+    bottom: 14%;
+
+    width: 360px;
+    height: 205px;
+
+    transform:
+        translateX(-50%);
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.scene.revealed .hug-area {
+    animation:
+        charactersAppear 1.2s
+        1.25s
+        ease-out
+        forwards;
+}
+
+
+/* =========================================================
+   CHARACTER BASE
+========================================================= */
+
+.character {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 78px;
+    height: 150px;
+
+    transform-origin:
+        bottom center;
+}
+
+.character.tall {
+    left: 52px;
+
+    height: 175px;
+}
+
+.character.short {
+    right: 52px;
+
+    height: 132px;
+}
+
+
+/* =========================================================
+   HEAD
+========================================================= */
+
+.head {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 48px;
+    height: 48px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9946c,
+            #bd7653
+        );
+
+    box-shadow:
+        inset -4px -3px 0 rgba(0,0,0,0.07);
+}
+
+.head::before {
+    content: "";
+
+    position: absolute;
+
+    left: 2px;
+    top: -3px;
+
+    width: 44px;
+    height: 22px;
+
+    border-radius:
+        55% 55% 35% 35%;
+
+    background: #2c211c;
+}
+
+.head::after {
+    content: "•  •";
+
+    position: absolute;
+
+    left: 9px;
+    top: 20px;
+
+    width: 30px;
+
+    color: #4a2b24;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.body {
+    position: absolute;
+
+    left: 50%;
+    top: 43px;
+
+    width: 57px;
+    height: 74px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        18px 18px 12px 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4e8bc5,
+            #326aa5
+        );
+}
+
+.short .body {
+    height: 61px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef7970,
+            #d95752
+        );
+}
+
+
+/* =========================================================
+   LEGS
+========================================================= */
+
+.leg {
+    position: absolute;
+
+    top: 109px;
+
+    width: 15px;
+    height: 46px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #2d4663,
+            #1d3048
+        );
+}
+
+.leg.left {
+    left: 19px;
+}
+
+.leg.right {
+    right: 19px;
+}
+
+.short .leg {
+    top: 101px;
+    height: 37px;
+}
+
+.leg::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -3px;
+
+    width: 24px;
+    height: 9px;
+
+    border-radius: 10px;
+
+    background: #17263a;
+}
+
+.leg.left::after {
+    left: -5px;
+}
+
+.leg.right::after {
+    right: -5px;
+}
+
+
+/* =========================================================
+   ARMS
+========================================================= */
+
+.arm {
+    position: absolute;
+
+    top: 53px;
+
+    width: 14px;
+    height: 65px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #d9946c,
+            #bd7653
+        );
+
+    transform-origin:
+        top center;
+}
+
+.arm.left {
+    left: 4px;
+
+    transform:
+        rotate(18deg);
+}
+
+.arm.right {
+    right: 4px;
+
+    transform:
+        rotate(-18deg);
+}
+
+.short .arm {
+    top: 50px;
+    height: 54px;
+}
+
+.short .arm.left {
+    transform:
+        rotate(15deg);
+}
+
+.short .arm.right {
+    transform:
+        rotate(-15deg);
+}
+
+
+/* =========================================================
+   HUG MOVEMENT
+========================================================= */
+
+.scene.revealed .tall {
+    animation:
+        tallHug
+        1.25s
+        1.5s
+        cubic-bezier(.2,.8,.25,1)
+        forwards;
+}
+
+.scene.revealed .short {
+    animation:
+        shortHug
+        1.25s
+        1.5s
+        cubic-bezier(.2,.8,.25,1)
+        forwards;
+}
+
+.scene.revealed .tall .arm.right {
+    animation:
+        tallArm
+        0.9s
+        1.75s
+        cubic-bezier(.2,.8,.25,1)
+        forwards;
+}
+
+.scene.revealed .short .arm.left {
+    animation:
+        shortArm
+        0.9s
+        1.75s
+        cubic-bezier(.2,.8,.25,1)
+        forwards;
+}
+
+@keyframes charactersAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes tallHug {
+
+    0% {
+        transform:
+            translateX(-55px)
+            rotate(-2deg);
+    }
+
+    65% {
+        transform:
+            translateX(27px)
+            rotate(2deg);
+    }
+
+    100% {
+        transform:
+            translateX(36px)
+            rotate(-3deg);
+    }
+}
+
+@keyframes shortHug {
+
+    0% {
+        transform:
+            translateX(55px)
+            rotate(2deg);
+    }
+
+    65% {
+        transform:
+            translateX(-27px)
+            rotate(-2deg);
+    }
+
+    100% {
+        transform:
+            translateX(-36px)
+            rotate(3deg);
+    }
+}
+
+@keyframes tallArm {
+
+    0% {
+        transform:
+            rotate(-18deg);
+    }
+
+    100% {
+        transform:
+            rotate(-62deg)
+            translateY(4px);
+    }
+}
+
+@keyframes shortArm {
+
+    0% {
+        transform:
+            rotate(15deg);
+    }
+
+    100% {
+        transform:
+            rotate(62deg)
+            translateY(4px);
+    }
+}
+
+
+/* =========================================================
+   HUG HEART
+========================================================= */
+
+.hug-heart {
+    position: absolute;
+
+    left: 50%;
+    top: 5px;
+
+    color: #ff6b81;
+
+    font-size: 28px;
+
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        scale(0);
+}
+
+.scene.revealed .hug-heart {
+    animation:
+        heartPop
+        1.5s
+        2.2s
+        ease-out
+        forwards;
+}
+
+@keyframes heartPop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,15px)
+            scale(0);
+    }
+
+    35% {
+        opacity: 1;
+
+        transform:
+            translate(-50%,-8px)
+            scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-45px)
+            scale(.85);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .scene {
+        min-height: 500px;
+    }
+
+    .message {
+        top: 12%;
+        width: 94%;
+    }
+
+    .message h1 {
+        font-size:
+            clamp(2.7rem,13vw,4rem);
+
+        letter-spacing: -1px;
+    }
+
+    .message p {
+        margin-top: 15px;
+
+        font-size: 1.15rem;
+    }
+
+    .sun-button {
+        width: 145px;
+    }
+
+    .scene-sun {
+        bottom: 22%;
+        width: 95px;
+    }
+
+    .sun-glow,
+    .rays {
+        bottom: 22%;
+    }
+
+    .hills {
+        bottom: 24%;
+        height: 13%;
+    }
+
+    .water {
+        height: 25%;
+    }
+
+    /* Trees become slightly smaller */
+
+    .trees {
+        width: 190px;
+        height: 260px;
+
+        bottom: 19%;
+    }
+
+    .trees.left {
+        left: -45px;
+    }
+
+    .trees.right {
+        right: -45px;
+    }
+
+    .trunk {
+        left: 78px;
+
+        width: 38px;
+        height: 375px;
+    }
+
+    .branch.one {
+        left: 88px;
+        bottom: 130px;
+        width: 85px;
+    }
+
+    .branch.two {
+        left: 78px;
+        bottom: 108px;
+        width: 80px;
+    }
+
+    .branch.three {
+        left: 94px;
+        bottom: 150px;
+        width: 60px;
+    }
+
+    .foliage.one {
+        left: 15px;
+        bottom: 135px;
+
+        width: 95px;
+        height: 80px;
+    }
+
+    .foliage.two {
+        left: 72px;
+        bottom: 150px;
+
+        width: 95px;
+        height: 90px;
+    }
+
+    .foliage.three {
+        left: 88px;
+        bottom: 92px;
+
+        width: 80px;
+        height: 70px;
+    }
+
+    .foliage.four {
+        left: 0;
+        bottom: 88px;
+
+        width: 80px;
+        height: 70px;
+    }
+
+    .foliage.five {
+        left: 50px;
+        bottom: 180px;
+
+        width: 80px;
+        height: 70px;
+    }
+
+    .hug-area {
+        bottom: 15%;
+
+        transform:
+            translateX(-50%)
+            scale(.78);
+    }
+}
+
+
+/* =========================================================
+   SMALL HEIGHT DEVICES
+========================================================= */
+
+@media (max-height: 650px) {
+
+    .message {
+        top: 8%;
+    }
+
+    .message h1 {
+        font-size:
+            clamp(2.4rem,11vw,3.7rem);
+    }
+
+    .message p {
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+
+    .hug-area {
+        bottom: 13%;
+    }
+
+    .trees {
+        bottom: 18%;
+        transform: scale(.82);
+        transform-origin: bottom;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     INTRO
+======================================================== -->
+
+<div class="intro" id="intro">
+
+    <button
+        class="sun-button"
+        id="sunButton"
+        type="button"
+        aria-label="Click the sun to start">
+
+        <span>
+            Click Me ☀️
+        </span>
+
+    </button>
+
+</div>
+
+
+<!-- =======================================================
+     MORNING SCENE
+======================================================== -->
+
+<div class="scene" id="scene">
+
+
+    <!-- ===================================================
+         CLOUDS
+    =================================================== -->
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
+
+
+    <!-- ===================================================
+         GREETING
+    =================================================== -->
+
+    <div class="message">
+
+        <h1>
+            Good Morning! ☀️
+        </h1>
+
+        <p>
+            Have a nice day
+            <span class="heart">♥</span>
+            😊
+        </p>
+
+    </div>
+
+
+    <!-- ===================================================
+         SUN
+    =================================================== -->
+
+    <div class="sun-glow"></div>
+
+    <div class="rays"></div>
+
+    <div class="scene-sun"></div>
+
+
+    <!-- ===================================================
+         BIRDS
+    =================================================== -->
+
+    <div class="birds">
+        ⌁　⌁
+    </div>
+
+
+    <!-- ===================================================
+         HILLS
+    =================================================== -->
+
+    <div class="hills"></div>
+
+
+    <!-- ===================================================
+         WATER
+    =================================================== -->
+
+    <div class="water"></div>
+
+
+    <!-- ===================================================
+         LEFT TREE
+    =================================================== -->
+
+    <div class="trees left">
+
+        <div class="trunk"></div>
+
+        <div class="branch one"></div>
+        <div class="branch two"></div>
+        <div class="branch three"></div>
+
+        <div class="foliage one"></div>
+        <div class="foliage two"></div>
+        <div class="foliage three"></div>
+        <div class="foliage four"></div>
+        <div class="foliage five"></div>
+
+        <div class="root left-root"></div>
+        <div class="root right-root"></div>
+
+    </div>
+
+
+    <!-- ===================================================
+         RIGHT TREE
+    =================================================== -->
+
+    <div class="trees right">
+
+        <div class="trunk"></div>
+
+        <div class="branch one"></div>
+        <div class="branch two"></div>
+        <div class="branch three"></div>
+
+        <div class="foliage one"></div>
+        <div class="foliage two"></div>
+        <div class="foliage three"></div>
+        <div class="foliage four"></div>
+        <div class="foliage five"></div>
+
+        <div class="root left-root"></div>
+        <div class="root right-root"></div>
+
+    </div>
+
+
+    <!-- ===================================================
+         HUGGING CHARACTERS
+    =================================================== -->
+
+    <div class="hug-area">
+
+        <div class="hug-heart">
+            ♥
+        </div>
+
+
+        <!-- Tall Male -->
+
+        <div class="character tall">
+
+            <div class="head"></div>
+
+            <div class="body"></div>
+
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+
+        </div>
+
+
+        <!-- Short Male -->
+
+        <div class="character short">
+
+            <div class="head"></div>
+
+            <div class="body"></div>
+
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+const sunButton =
+    document.getElementById("sunButton");
+
+const intro =
+    document.getElementById("intro");
+
+const scene =
+    document.getElementById("scene");
+
+
+sunButton.addEventListener("click", function () {
+
+    /* Hide the opening screen */
+
+    intro.classList.add("hidden");
+
+
+    /* Reveal the morning scene */
+
+    scene.classList.add("revealed");
+
+});
+
+</script>
+
+
+</body>
+</html>
